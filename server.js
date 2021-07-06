@@ -20,10 +20,37 @@ app.use(express.static('website'));
 
 // Start up an instance of app
 const port = 6060;
-const server = app.listen(port, listening);
+
 function listening() {
-    console.log('server runing');
-    console.log(`running on localhost: ${port}`);
+    const serverR= 'server runing';
+    const serverP= `running on localhost: ${port}`;
+    console.log(serverR);
+    console.log(serverP);
 };
+function myServer(callback) {
+    const server = app.listen(port, listening);
+    callback(server)
+};
+ myServer((result)=> {
+    // console.log(result)
+ });
 
 // Setup Server
+
+//get rout to return projectData object
+
+app.get('/', sendData);
+
+function sendData (req, res) {
+  res.send(projectData);
+  console.log(projectData);
+};
+
+//post route to add data to projectData
+const data = [];
+app.post('/', callBack);
+
+function callBack(req,res){
+  data.push(req.body);
+  console.log(data);
+}
