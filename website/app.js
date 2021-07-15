@@ -1,29 +1,75 @@
 /* Global Variables */
+let baseUrl = 'https://community-open-weather-map.p.rapidapi.com/forecast?zip=';
+let apiKey = 'fe0125f924msh059d2ce0c148768p1c8a84jsnc14b816c0ded';
+let apiHost = 'community-open-weather-map.p.rapidapi.com';
+
 
 // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
+//Date
+function date() {
+    let dynData = new Date();
+    let newDate = dynData.getDate()+'/'+ dynData.getMonth()+'/'+ dynData.getFullYear();
+
+    console.log('Date: ', newDate);
+}
+
+//feeling
+function feeling() {
+    let feeling = document.getElementById('feelings').value;
+    
+    console.log('Feeling: ', feeling);
+}
+
+ 
+
+//ZipCode
+function zipCode() {
+    let zipCode = document.getElementById('zip').value;
+
+    console.log('Zip Code: ', zipCode);
+}
+
+//Tempreature
+function Temp() {};
+
+
+//eventListeners
+function generate() {
+    let generation = document.getElementById('generate')
+    generation.addEventListener('click', function() {
+        zipCode();
+        feeling();
+        date();
+    });
+}
+generate();
+
+
 
 //syncing
-const postData = async ( url = '', data = {})=>{
-    console.log(data);
-      const response = await fetch(url, {
-      method: 'POST', 
-      credentials: 'same-origin',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-     // Body data type must match "Content-Type" header        
-      body: JSON.stringify(data), 
-    });
+// const getWeatherData = async ( baseUrl, zipCode, apiKey)=>{
+//     const res = await fetch(baseUrl+ zipCode, {
+//         "method": "GET",
+//         "headers": {
+//             "x-rapidapi-key": apiKey,
+//             "x-rapidapi-host": apiHost
+//         }
+//     })
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(err => {
+//         console.error(err);
+//     });
+// }
 
-      try {
-        const newData = await response.json();
-        console.log(newData);
-        return newData;
-      }catch(error) {
-      console.log("error", error);
-      }
-  }
+// function clickAction(e) {
+//     getWeatherData(baseUrl, zipCode, apiKey)
+// }
 
-  postData('/', {temperature:35, date:'12/5/2020', user_response:true});
+
+
+
+
+// getWeatherData()
